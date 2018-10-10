@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>EV3 coding patterns and best practices</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
+    <link rel="stylesheet" href="js/ekko-lightbox.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="bg-primary text-white">
+      <div class="container text-center">
+        <h1>EV3 coding patterns and best practices</h1>
+        <p class="lead">Best practices, tips and tricks for EV3 programming techniques along with their visualization in the <a
+
+            id="index.html" href="index.html" title="EV3TreeVis project">EV3TreeVis</a> project.</p>
+      </div>
+    </header>
+    <div class="container">
+      <p> The LEGO Mindstorms EV3 program offers a graphical interface and language EV3G to create stunning programs for your EV3 brick, motors and sensors. During my experience helping and coaching teams for First Lego League for several years I have seen great coding patterns. </p>
+      <p>As FLL is about learning and sharing I would like to share these patterns with you along with the <a
+
+          href="binary/demo_ev3treevis.ev3">example ev3 file</a>. </p>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <div class="container"> <button class="navbar-toggler" type="button"
+
+          data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+
+          aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"> <a class="nav-link js-scroll-trigger"
+
+                href="#blocks">Blocks</a> </li>
+            <li class="nav-item"> <a class="nav-link js-scroll-trigger"
+
+                href="#wires">Wires</a> </li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#loops">Loops</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#switches">Switches</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#conditions">Conditions</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#values">Values</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#comments">Comments</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#parallel">Parallel</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#datalogger">Datalogger</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#myblocks">MyBlocks</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#connectors">Connectors</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portwiring">Port wiring</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#conversion">Conversion</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#metrics">Metrics</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section id="blocks">
+      <div class="container">
+        <h2>Block visualization</h2>
+        <div class="subsection learn">
+          <p>The official Mindstorms program offers a graphical language for creating stunning programs. In the EV3G language it is easy to drag new blocks and connect the pieces like a puzzle.</p>
+        </div>
+        <div class="subsection see">
+          <p>In EV3TreeVis each Mindstorms block is visualized as an individual block with all its input and output attributes. Blocks follow one another based on the execution sequence.</p>
+          <p>Block colors and icons properties follow the properties displayed within the EV3 Mindstorms editor.</p>
+          <p><img src="img/f01.png" class="col-sm-6 lightbox" alt="Blocks are simple pieces of functionality"><img
+
+              src="img/f01lt.png" class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="wires">
+      <div class="container">
+        <h2>Data wires</h2>
+        <div class="subsection learn">
+          <p>Data Wires are very effective technique for "remembering" something at a block and during execution use the same information - even at a later stage. Think of it as a very effective container that can even be a time capsule. Any output parameters can start a data wire and any input parameters can receive value from a data wire. A data wire can be connected to more than one targets.</p>
+          <p>Data wires have types according to the data transported. A data wire can even remember if you stored text, number, bool(yes-or-no) or several numbers or bools inside. This is called data wire type.</p>
+        </div>
+        <div class="subsection see">
+          <p>Data wires between blocks are tracked and handled.<br>
+            Data wire naming include data wire type: number <code>dNw</code>, bool <code>dBw</code>, string <code>dSw</code>, bool array <code>dABw</code> and number array <code>dANw</code>.</p>
+          <p><img src="img/f02.png" class="col-sm-6 lightbox" alt="Data wires move information from one block to a later one"><img
+
+              src="img/f02lt.png" class="col-sm-6 lightbox"></p>
+        </div>
+        <div class="subsection suggestedreading">
+          <p>More info on data wires available at <a href="https://ev3-help-online.api.education.lego.com/Education/en-gb/page.html?Path=editor%2FDataWires.html">LEGO help</a>, <a
+
+              href="http://ev3lessons.com/translations/en-us/intermediate/DataWires.pdf">EV3Lessons - Data wires.</a></p>
+        </div>
+      </div>
+    </section>
+    <section id="wires2">
+      <div class="container">
+        <h2>Data wires with global scope</h2>
+        <div class="subsection learn">
+          <p>In the EV3 editor data wires can pass through Loop and Tabbed Switch block boundaries. This is extremely useful for more complex programs like the one below - move forward and if red was detected move back with the same distance arriving to the starting position.</p>
+        </div>
+        <div class="subsection see">
+          <p>For consistency reasons such data wires are detected and merged for display showing the same data wire Id. </p>
+          <p><img src="img/f03.png" class="col-sm-6 lightbox"><img src="img/f03lt.png"
+
+              class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="loops">
+      <div class="container">
+        <h2>Loop Blocks</h2>
+        <div class="subsection learn">
+          <p> You <span class="error_underline">dont</span> like repeating yourself, right? You <span
+
+              class="error_underline">dont</span> like repeating yourself, right? You <span
+
+              class="error_underline">dont</span> like repeating yourself, right? Why not code it only once and enjoy the rest of the fun?<br>
+            Just imagine how convenient would it be to correct the mistake only once? :-D</p>
+          <p> Loop blocks repeat the instructions inside the block until the condition selected happens - from simply repeating everything 3 times to repeating everything until a color sensor detects red color.</p>
+        </div>
+        <div class="subsection see">
+          <p>Loop blocks and all internal sub-blocks are processed.<br>
+            Loop Block output index is added when used with a data wire.<br>
+            Loop Block internal blocks are shown as child elements for the loop blocks. </p>
+          <p><img src="img/f04.png" class="col-sm-6 lightbox"><img src="img/f04lt.png"
+
+              class="col-sm-6 lightbox"></p>
+          <p><img src="img/f05.png" class="col-sm-6 lightbox"><img src="img/f05lt.png"
+
+              class="col-sm-6 lightbox"></p>
+        </div>
+        <div class="subsection suggestedreading">
+          <p>More info on data wires available at <a href="http://ev3lessons.com/translations/en-us/beginner/Loops.pdf">EV3Lessons - Loops.</a></p>
+        </div>
+      </div>
+    </section>
+    <section id="switches">
+      <div class="container">
+        <h2>Switch Blocks</h2>
+        <div class="subsection learn">
+          <p>Often you would like adapt your program to your environment and execute the most appropriate action related to the environment conditions. Switch block decides what to do and will execute only one of the branches depending on the input value - either by choosing a number, color or deciding whether touch sensor was pressed or not. This is called a "Case".</p>
+          <p>Black circle indicates default case - this is executed when something not specified by the cases happens.<br>
+            Cases can be removed by the (x) button and can be added by the (+) button.</p>
+          <p>Switches can be shown either as Flat or Tabbed view by the button on the block top left corner. For now tabbed view provides nearly* the same functionality as flat view in a more condensed format. In tabbed view data wires can pass through Switch block boundaries both as inbound or outbound data.</p>
+          <p><strong>Tabbed Switch blocks</strong> can receive incoming data wires and can have outgoing data wires. This is called <strong>data tunnel</strong>. Each Case can individually connect to the data wire using a very effective programming technique.</p>
+        </div>
+        <div class="subsection see">
+          <p>Switch blocks and all internal sub-blocks are processed in EV3TreeVis.<br>
+            Switch Block Case internal blocks are shown as child elements for the switch block.</p>
+          <p><img src="img/f08.png" class="col-sm-6 lightbox"><img src="img/f08lt.png"
+
+              class="col-sm-6 lightbox"></p>
+          <p><img src="img/f12.png" class="col-sm-6 lightbox"><img src="img/f12lt.png"
+
+              class="col-sm-6 lightbox"></p>
+        </div>
+        <div class="subsection suggestedreading">
+          <p>More info on data wires available at <a href="http://ev3lessons.com/translations/en-us/beginner/Switches.pdf">EV3Lessons - Switches.</a></p>
+        </div>
+      </div>
+    </section>
+    <section id="conditions">
+      <div class="container">
+        <h2>Switch and Loop condition</h2>
+        <div class="subsection learn">
+          <p>Loop blocks repeat the instructions inside the block until the selected condition happens - e.g. from simply repeating everything 3 times to repeating everything until a color sensor detects red color.<br>
+            Switch block decides what to do and will execute only one of the cases depending on the input value - either by choosing a number, color or deciding whether touch sensor was pressed or not. This is called a "Case".</p>
+          <p>The Stop or Switch Condition can be set by setting the "main mode" parameter of the blocks. Several options are available based on the available sensors.</p>
+          <p><i>Hint: With some sensors <b>Measure </b>sub-mode is available to the <b>Compare </b>sub-mode which is always available for Switch blocks. Compare provides yes-or-no (bool) results while measure provides a finite number of choices - such as color detected or button pressed.</i></p>
+        </div>
+        <div class="subsection see">
+          <p>Switch Block Case and Loop Block Stop condition with all parameters are added.</p>
+          <p><img src="img/f07.png" class="col-sm-6 lightbox"><img src="img/f07lt.png"
+
+              class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="project">
+      <div class="container">
+        <h2>Project Overview</h2>
+        <div class="subsection learn">
+          <p>An EV3 project typically contains several small indpendent programs. Often these programs do not tie together, rather are started individually from the brick's menu. In more complex projects a better overview is preferred. The project page offered by the standard EV3 software under the wrench icon is somewhat limited.</p>
+          <p> Furthermore the EV3 software, as of today hides some errors that can cause program break during the run. </p>
+        </div>
+        <div class="subsection see">
+          <p>The EV3TreeVis offers a complete overview of the EV3 Project with all Programs and MyBlocks visualized. The overview is clickable and dependency graph is clearly shown. MyBlock usage and calls are clickable on the graphic and textual modes as well. </p>
+          <p>When moving variables between projects, global variables are not copied. This does not yield to any runtime errors, yet can cause problems. EV3TreeVis detects and shows this as a warning. </p>
+          <p>Deleted MyBlocks yield to runtime errors. EV3TreeVis detects and shows this as a warning. </p>
+          <p>Missing Sound and Image files are detected and shown as warnings. </p>
+          <p><img src="img/f16b.png" class="col-sm-6 lightbox"><img src="img/f16a.png"
+
+              class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="values">
+      <div class="container">
+        <h2>Meaningful value display</h2>
+        <div class="subsection learn">
+          <p> The EV3 editor supports a variety of mall visual utilities to help you select the right value for a parameter. This way there is no need to remember what color 1 or change type 1 mean, you can select the right value from a drop down list.</p>
+          <label>Examples:
+            <ul>
+              <li>Color values e.g. Red, Blue ...</li>
+              <li>Brick buttons e.g. Top, Bottom, Center ...</li>
+              <li>Touch sensor values e.g. Pressed, Released, Bumped</li>
+              <li>Sound wait types e.g. Play once, Repeat ...</li>
+              <li>Comparisons e.g. &gt;, &gt;=, &lt;, &lt;= ...</li>
+              <li>Changes e.g. Increase, Decrease ...</li>
+            </ul>
+          </label>
+          <p></p>
+        </div>
+        <div class="subsection see">
+          <p>Values are converted to a meaningful text for easier understanding.</p>
+          <p><img src="img/f10.png" class="col-sm-6 lightbox"><img src="img/f10lt.png"
+
+              class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="comments">
+      <div class="container">
+        <h2>Comment blocks and boxes</h2>
+        <div class="subsection learn">
+          <p>Your code is often self explanatory and obvious. Sometimes things get more complex and hard to remember.<br>
+            Actually things are always hard to remember. A good technique is to write the most important information to remember nearby to the code.</p>
+          <p>EV3 offers blue comment blocks that can be placed inside your code or comment boxes that are free to move.</p>
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col"> <br>
+                </th>
+                <th scope="col">Comment Block</th>
+                <th scope="col">Comment Box</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr scope="row">
+                <th>Advantage</th>
+                <td>Moves with your code</td>
+                <td>Can be resized freely, can contain arbitrary amount of text</td>
+              </tr>
+              <tr scope="row">
+                <th>Disadvantage</th>
+                <td>Takes up space in code<br>
+                  Little amounts of available space for text</td>
+                <td>Does not move with code, difficult to maintain</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="subsection see">
+          <p>Both CommentBlocks and CommentBoxes are handled in the program. Comment boxes are added before to the nearest valid* block considering loop and switch internal structures. </p>
+          <p>* Inactive blocks are ignored.</p>
+          <p><img src="img/f06.png" class="col-sm-6 lightbox"><img src="img/f06lt.png"
+              class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="parallel">
+      <div class="container">
+        <h2>Parallel Threads</h2>
+        <div class="subsection learn">
+          <p> Blocks are executed one after the other. This is called block sequence and the connector is often referred as sequence plug. 
+            Many projects start simple and can achieve great results just adding several blocks.  
+          </p>
+          <p>
+            One key factor for success during FLL is how team can handle the time limit, constrainting the robot ability to act in a simple way. 
+            When you live and move in your everyday life you also move your legs, arms and several muscles all at once.
+            EV3 software can also help you do two or more things in parallel. For example you might start moving 4 motors in parallel, while waiting for a touch sensor and a color sensor. 
+          </p>
+        </div>
+        <div class="subsection see">
+          <p>EV3TreeVis display parallel sequence blocks in the generated tree, ordering the simpler branch to the front.</p>
+          <p><img src="img/f17.png" class="col-sm-6 lightbox"><img src="img/f17lt.png"
+              class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="datalogger">
+      <div class="container">
+        <h2>DataLogger Blocks <small class="text-muted">with Education version only</small> </h2>
+        <div class="alert alert-warning" role="alert"> Content coming soon! </div>
+        <!--
+        <div class="subsection learn"><p></p> </div>                <div class="subsection see"><p></p> </div>
+        --> </div>
+    </section>
+    <section id="myblocks">
+      <div class="container">
+        <h2>MyBlocks with input, output parameters and icons</h2>
+        <div class="subsection learn">
+          <p>Writing several blocks of code you would like to use frequently can be boring and also quite disappointing.</p>
+          <p> When creating software developers often group these blocks together and add a label to them so that it needs to be created only once. Also when you need to change anything later on you need to change it only once. </p>
+          <p> In the EV3-G we call such blocks of code grouped together <b>MyBlocks</b>. These blocks can also receive inputs of any data kind and can also return values computed or collected. Use this technique if you have created something that seems multi-purpose and you would like to use it multiple times. </p>
+        </div>
+        <div class="subsection see">
+          <p>EV3TreeVis reads all programs and myblocks from the project. Each MyBlocks is colored with its original color. In graphical mode the appropriate icon is used. MyBlocks input and output parameters are named data wires that are also visualized for easier comprehension e.g. <code>dN12w[cm]</code> and <code>dNw15[coloratend]</code>.</p>
+          <p><img src="img/f14.png" class="col-sm-6 lightbox"><img src="img/f14lt.png"
+
+              class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="connectors">
+      <div class="container">
+        <h2>Data Wire Tunnel Shortcuts a.k.a. Connectors <sup><small class="badge badge-warning">Advanced technique</small></sup> </h2>
+        <div class="subsection learn">
+          <p> You can adjust the data flow in your programs in several ways. For a start you will use conditional blocks with repeated statements. Later on you will store data in variables based on conditions and will connect this data to the blocks used.</p>
+          <p>In cases where you would like adjust the data flow based on conditional statements. An advanced technique for avoiding unnecessary variables is using wire tunnels in switch statements without any blocks shortcutting the incoming and outgoing tunnels. With this based on a condition you can determine whichever input data tunnel is connected to whichever output data tunnel. Let's call this a <strong>Connector</strong>.</p>
+          <p>Use this technique with caution for simpler code and shorter programs. Make sure you have full understanding of Data Wires and Data Wire Tunnels.</p>
+        </div>
+        <div class="subsection see">
+          <p>Data wires are visualized and are connected withing global scope traversing through the tunnels.</p>
+          <p>As depending on the conditions data wires are connected in different ways a new pseudo block is added to the visualization with "Connector" name.</p>
+          <p>Example taken from <a href="http://robotsquare.com/2014/07/01/tutorial-ev3-self-balancing-robot/">GyroBoy_Balanc3r robotsquare</a> site from Laurens Valk. This example creates a MyBlock where value is limited between min and max values.</p>
+          <p> </p>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th> <br>
+                </th>
+                <th scope="col">Value is between Min and Max</th>
+                <th>Value is smaller than Min</th>
+                <th scope="col">Value is greater than Max</th>
+              </tr>
+              <tr scope="row">
+                <th>min = 10<br>
+                  max = 30</th>
+                <td>value = 20<br>
+                  result = 20 (input)</td>
+                <td>input = 8<br>
+                  result = 10 (min)</td>
+                <td>input = 46<br>
+                  result = 30 (max)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p><img src="img/f13.png" class="col-sm-6 lightbox"><img src="img/f13lt.png"
+
+              class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="portwiring">
+      <div class="container">
+        <h2>Port Wiring <sup><small class="badge badge-warning">Advanced technique</small></sup> </h2>
+        <div class="subsection learn">
+          <p>Your EV3 brick can communicate with up to 4 motors and 4 sensors via its ports. Motor ports are named A-B-C-D, while sensor ports and numbered by 1-2-3-4. Most often you have decided which motor to operate for moving the robot or pushing and arm that is connected to a motor.</p>
+          <p> In FLL robots I have seen as a common practice B-C big EV3 motors connected to left and right wheels, while A and D medium or big motors used for handling arms interacting with mission models. Sensor usage and numbering depends on the needs for your robot (e.g. 1-3 color sensors, 4 gyro sensor). </p>
+          <p>A smart programmer might consider creating an universal MyBlock which can operate on different motors (e.g. A or D) or having line following myblock working either for color sensor connected to any arbitrary port. Besides the default 'top right' port selection on the blocks, you can select port from an input data wire and create uniform and generalized code, too. This technique is called port wiring or dynamic ports. </p>
+          <div class="alert alert-warning" role="alert"> Watch out: when using wired port input for Move Tank or Steering mode you need to select the wired port input twice. Click on the left and on the right site as well. Additionally you need to use two-digit numbers for the port numbering.</div>
+        </div>
+        <div class="subsection see">
+          <p> Port wiring is displayed the same way as data wires also using the global scope.</p>
+          <p><img src="img/f15.png" class="col-sm-6 lightbox"><img src="img/f15lt.png"
+
+              class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="conversion">
+      <div class="container">
+        <h2>Data wires and conversion <sup><small class="badge badge-warning">Advanced technique</small></sup></h2>
+        <div class="subsection learn">
+          <p>Data inputs connected to data wires can automatically convert single data. Data wires can be converted bool &gt; numeric &gt; text.</p>
+          <p>For example 99 as a number will be translated as "99" text when needed. Similarly, False is translated to 0 or "0".</p>
+          <p>Array types do not convert data.</p>
+        </div>
+        <div class="subsection see">
+          <p> </p>
+          <p><img src="img/f09.png" class="col-sm-6 lightbox" alt="Data conversion: data can be converted bool &gt; numeric &gt; text."><img
+
+              src="img/f09lt.png" class="col-sm-6 lightbox"></p>
+        </div>
+      </div>
+    </section>
+    <section id="metrics">
+      <div class="container">
+        <h2>Static Code Metrics <sup><small class="badge badge-warning">Advanced technique</small></sup> </h2>
+        <div class="subsection learn">
+          <p> The program and the brick that you are using for programming your robot is much more complex than the ones used in the first space satellites or rockets. </p>
+          <p> Software code tend to grow more and more complex as time passes by. Though EV3 is a serious play environment, you are still developing a piece of software that will autonomously run on a machine capable of <span
+
+              class="text-muted">nearly</span> anything. </p>
+          <p> In big companies, like Google, Microsoft or Facebook professionals not only develop the code we use on a daily basis, but also make sure that the code works. I mean WORKS and if there are changes or fixes they are applied smoothly. This requires a clean and simple environment. A simple and tidy room. </p>
+          <p> Defining simplicity where new code can be added, existing one can be modified safely is a tough challenge. Software developers tend to define some numbers that can calculated and tell them if a code is clean and simple enough. These numbers are often called <b>Static Code Metrics</b>.</p>
+          <p><strong>Complexity is not necessarily bad.</strong> If you know what you are doing and your peers or audience can still handle the code with confidence.<br>
+            Please find a code snippet from a great piece of EV3 code - Mindcub3r from David Gilday <a
+
+              href="http://mindcuber.com">http://mindcuber.com</a>. </p>
+        </div>
+        <div class="subsection see">
+          <p>What characterizes a code you can easily maintain and change? Currently EVTreeVis calculates some metrics to guide your way. (Still in a very early phase.)</p>
+          <table style="width: 100%" class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Code Metric<br>
+                </th>
+                <th scope="col">Description</th>
+                <th scope="col">Recommendation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr scope="row">
+                <th>Nodes</th>
+                <td>Number of blocks in a program<br>
+                  Too many blocks (nodes) on one program tend to make it hard to edit, understand or change.</td>
+                <td>Consider moving some of the code to a meaningful MyBlock.</td>
+              </tr>
+              <tr>
+                <th>MaxBranches</th>
+                <td>Maximum branches in Switch blocks<br>
+                  While many branches can make a program compact, it will make the number of different possibilities explode and harder and harder to understand and test.</td>
+                <td>Re-check whether all cases are used well and consciously.<br>
+                </td>
+              </tr>
+              <tr>
+                <th>MaxDepth</th>
+                <td>Maximum depth - loops and switches<br>
+                  Too many levels of make it hard to read, slow to edit and easy to introduce errors while editing</td>
+                <td>Consider moving some of the code to a meaningful MyBlock.<br>
+                </td>
+              </tr>
+              <tr>
+                <th>MaxForks</th>
+                <td>Number of max number of parallel threads<br>
+                  While parallel threads attribute a great and effective program, unconscious use will make your program hard to read and extend or modify.</td>
+                <td>Re-check whether all parallel thread forks are used well and consciously. </td>
+              </tr>
+              <tr scope="row">
+                <th>NodeTypes</th>
+                <td>Number of different types of blocks<br>
+                  Use the right block for the right purpose. If your program have too many types of blocks it could mean that your code is not well structured. </td>
+                <td>Consider structuring your code better. Re-thing your myblocks structure.<br>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p></p>
+          <p></p>
+          <figure><img src="img/f11.png" class="col-sm-6 lightbox figure-img figure-img img-fluid rounded"
+
+              alt="Example code from Mindcub3r project from David Gilday"><img
+
+              src="img/f11lt.png" class="col-sm-6 lightbox figure-img"> <figcaption
+
+              class="figure-caption text-center">Example code from Mindcub3r project from David Gilday from <a
+
+                href="http://mindcuber.com">http://mindcuber.com</a></figcaption> </figure>
+          <p></p>
+        </div>
+        <div class="subsection suggestedreading">
+          <p> </p>
+          <label>Starting points for more info on code metrics
+            <ul>
+              <li><a href="https://msdn.microsoft.com/en-us/library/bb385910.aspx">Measuring Complexity and Maintainability of Managed Code</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Static_program_analysis">Static program analysis</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic complexity</a></li>
+            </ul>
+          </label>
+          <p></p>
+        </div>
+      </div>
+    </section>
+    <footer class="bd-footer text-muted">
+      <div class="container text-center bg-light">
+        <div>
+          <ul class="bd-footer-links">
+            <li><a href="index.html" class="toc">EV3 Tree Visualizer</a></li>
+            <li><a href="features.html" class="toc">Coding Patterns and Best Practices</a></li>
+            <li><a href="filesyntax.html" class="toc">EV3 File Syntax</a></li>
+          </ul>
+        </div>
+        <div> <a class="btn btn-primary btn-lg" href="https://s3.eu-west-3.amazonaws.com/ev3treevis/ev3treevis-win-x86.zip">Download for Windows</a><br>
+          <br>
+          <p>Download the binary artifact for Windows systems. Artifact was build using GitLab/CI, binary hosting is on Amazon S3.</p>
+          <p>All codes are still under development. All suggestions, ideas, contributions are more than welcome! </p>
+          <p>Site and concept created by Attila Farago. You might freely use, share any generated artifacts, visualizations with attribution in place.</p>
+        </div>
+        <div>
+          <p><br>
+            <a class="btn btn-social-icon btn-google" href="mailto:attila.farago.hu+ev3treevis@gmail.com"> <span
+
+                class="fa fa-envelope-o"></span> </a> <a class="btn btn-social-icon btn-facebook"
+
+              href="https://www.facebook.com/ev3treevis"> <span class="fa fa-facebook"></span> </a> <a
+
+              class="btn btn-social-icon btn-linkedin" href="https://www.linkedin.com/in/afarago/"> <span
+
+                class="fa fa-linkedin"></span> </a> </p>
+        </div>
+      </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="js/ekko-lightbox.min.js"></script>
+    <!-- Custom JavaScript for this theme -->
+    <script src="js/scrolling-nav.js"></script>
+    <script>
+			// add lightbox to all examples
+      $(document).ready(function(){
+      	$("img.lightbox").each( function (idx, elem) {
+          $(this)
+            .attr("data-remote", $(this).attr("src"))
+          	.attr("data-toggle","lightbox")
+          	.attr("data-gallery", "gallery1")
+          	.attr("data-title", $(this).attr("alt"))
+        });
+        $(".subsection.learn p:first-child").prepend("<span class='badge badge-secondary'>Learn</span> "); 
+        $(".subsection.see p:first-child").prepend("<span class='badge badge-dark'>See in EV3TreeVis</span> "); 
+        $(".subsection.suggestedreading p:first-child").prepend("<span class='badge badge-info'>Suggested reading</span> "); 
+      });
+		</script>
+    <script>
+			$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+				event.preventDefault();
+				$(this).ekkoLightbox();
+			});
+		</script>
+    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-111545401-1"></script>
+    <script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-111545401-1');
+		</script>
+    
+  </body>
+</html>

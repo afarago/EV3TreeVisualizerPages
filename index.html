@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>EV3TreeVisualizer Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
+    <link rel="stylesheet" href="js/ekko-lightbox.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="bg-primary text-white">
+      <div class="container text-center"> <img src="img/favicon/favicon-100x100.png"
+          style="top: -20px; position: relative;">
+        <h1>Mindstorms EV3 Tree Visualizer</h1>
+        <p class="lead">My Hobby Project to visualize EV3 programs created for LEGO Mindstorms EV3.</p>
+        <div class="alert alert-primary" role="alert">Try online version at <a
+            href="http://ev3treevis.azurewebsites.net" target="_blank">http://ev3treevis.azurewebsites.net</a><br>
+          Download for Windows <a href="https://s3.eu-west-3.amazonaws.com/ev3treevis/ev3treevis-win-x86.zip">ev3treevis-win-x86.zip</a></div>
+        <div> News and updates are available on the <a href="https://www.facebook.com/ev3treevis/">facebook page</a>. </div>
+      </div>
+    </header>
+    <div class="container">
+      <div>
+        <p> EV3 Tree visualizer has emerged as a hobby project to rapidly, effectively and easily visualize EV3 programs created by the LEGO Mindstorms EV3 programming environment EV3-G or EV3M programs created on the iPad graphical programming environment.<br>
+          This project is still a young one, so please kindly forgive any mistakes and give feedback to me. </p>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h3>Command Line</h3>
+          <img src="img/commandline_r.png" alt="Command Line" style="width:100%"
+            data-toggle="lightbox" data-gallery="features-gallery" data-remote="img/commandline.png">
+          <p>Flat tree structure to quickly visualize the content of file covering all standard blocks and parameters and some more.</p>
+          <p> </p>
+          <ul>
+            <li>Parallel Thread, Switch, Loop</li>
+            <li>Global typed data wires</li>
+            <li>Data wires short circuit</li>
+            <li>Friendly data values for colors, touches</li>
+          </ul>
+          <p></p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Online with Browser</h3>
+          <img src="img/BrowserDisplay_r.png" alt="Browser Visualization"
+            style="width:100%" data-toggle="lightbox" data-gallery="features-gallery"
+            data-remote="img/BrowserDisplay.png">
+          <p> Graphical representation of the program with zoom and pan for a better/different visualization of your ev3 program.</p>
+          <p>Online version hosted in the Azure Cloud is out. Try it!</p>
+          <p><a href="http://ev3treevis.azurewebsites.net/" target="_blank">ev3treevis.azurewebsites.net</a></p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Git integration</h3>
+          <img src="img/GitIntegration_r.png" alt="Shell Integration" style="width:100%"
+            data-toggle="lightbox" data-gallery="features-gallery" data-remote="img/GitIntegration.png"> <br>
+          <p>EV3 is for just for playing, right? For serious fun, like <a
+              href="https://www.first-lego-league.org/en/">First Lego League</a> projects, kids often work on one project for several months and seek for an easy version management and review system.</p>
+          <p>Git can do the work well and with EV3TreeVis Git integration even changes can be tracked in a highly professional way.</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Shell integration</h3>
+          <img src="img/ShellIntegration_r.png" alt="Shell Integration"
+            style="width:100%" data-toggle="lightbox" data-gallery="features-gallery"
+            data-remote="img/ShellIntegration.png"> <br>
+          <p>EV3TreeVis can be integrated into the Windows Shell providing a quick preview of your favorite ev3 project.</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Project Overview</h3>
+          <img src="img/ProjectOverview_r.png" alt="Browser Visualization"
+            style="width:100%" data-toggle="lightbox" data-gallery="features-gallery"
+            data-remote="img/ProjectOverview.png">
+          <p>Overview of the EV3 Project with all Programs and MyBlocks visualized.</p>
+          <p>Dependency graph, variable usage, sound and image media usage is included.</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Error detection</h3>
+          <img src="img/ErrorDetection_r.png" alt="Browser Visualization"
+            style="width:100%" data-toggle="lightbox" data-gallery="features-gallery"
+            data-remote="img/ErrorDetection.png">
+          <p>Several smaller or bigger errors can araise with your project. Some may cause smaller annoyances, same can even break your code.</p>
+          <p>EV3TreeVis shows missing variables, deleted myblocks, images and sounds and unused variables, images, sounds.</p>
+        </div>
+      </div>
+      <div>
+        <p> Best practices, tips and tricks for EV3 programming techniques along with their their visualization in the EV3TreeVis project for educational purposes are provided at the <a
+            href="features.html" class="toc">Coding Patterns and Best Practices</a> page. </p>
+      </div>
+    </div>
+    <footer class="bd-footer text-muted">
+      <div class="container text-center bg-light">
+        <div>
+          <ul class="bd-footer-links">
+            <li><a href="index.html" class="toc">EV3 Tree Visualizer</a></li>
+            <li><a href="features.html" class="toc">Coding Patterns and Best Practices</a></li>
+            <li><a href="filesyntax.html" class="toc">EV3 File Syntax</a></li>
+          </ul>
+        </div>
+        <div> <a class="btn btn-primary btn-lg" href="https://s3.eu-west-3.amazonaws.com/ev3treevis/ev3treevis-win-x86.zip">Download for Windows</a> &nbsp; <a
+            class="btn btn-primary btn-lg" href="http://ev3treevis.azurewebsites.net">Online version on Azure</a> <br>
+          <br>
+          <p>Download the binary artifact for Windows systems. Artifact was build using GitLab/CI, binary hosting is on Amazon S3.</p>
+          <p>All codes are still under development. All suggestions, ideas, contributions are more than welcome! </p>
+          <p>Site and concept created by Attila Farago. You might freely use, share any generated artifacts, visualizations with attribution in place.</p>
+        </div>
+        <div>
+          <p><br>
+            <a class="btn btn-social-icon btn-google" href="mailto:attila.farago.hu+ev3treevis@gmail.com"> <span
+                class="fa fa-envelope-o"></span> </a> <a class="btn btn-social-icon btn-facebook"
+              href="https://www.facebook.com/ev3treevis"> <span class="fa fa-facebook"></span> </a> <a
+              class="btn btn-social-icon btn-linkedin" href="https://www.linkedin.com/in/afarago/"> <span
+                class="fa fa-linkedin"></span> </a> </p>
+        </div>
+      </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="js/ekko-lightbox.min.js"></script>
+    <script>
+			$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+				event.preventDefault();
+				$(this).ekkoLightbox();
+			});
+		</script>
+    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-111545401-1"></script>
+    <script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-111545401-1');
+		</script>
+  </body>
+</html>

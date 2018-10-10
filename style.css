@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <link rel="alternate stylesheet" type="text/css" href="resource://gre-resources/plaintext.css"
+      title="Wrap Long Lines">
+  </head>
+  <body>
+    <pre>&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta http-equiv="content-type" content="text/html; charset=windows-1252"&gt;
+    &lt;link rel="alternate stylesheet" type="text/css" href="resource://gre-resources/plaintext.css"
+
+      title="Wrap Long Lines"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;pre&gt;.error_underline {
+	text-decoration: underline wavy;
+	-webkit-text-decoration-color: red; /* safari still uses vendor prefix */
+	text-decoration-color: red;
+}
+section {
+	padding: 30px 0px;
+}
+section .subsection {
+	border-left: 4px white solid;
+	margin-left: 0.5em;
+	padding-left: 1em;
+}
+section .subsection.learn {
+	border-left-color: #868e96;
+}
+section .subsection.see {
+	border-left-color: #343a40;
+}
+section .subsection.suggestedreading {
+	border-left-color: #17a2b8;
+}
+section:nth-child(even) {
+	background-color: #f8f9fa!important;
+}
+
+.nav-masthead .nav-link {
+	padding: .25rem 0;
+	font-weight: bold;
+	color: rgba(0,0,0,.5);
+	background-color: transparent;
+	border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+	border-bottom-color: rgba(0,0,0,.25);
+}
+.nav-masthead .nav-link + .nav-link {
+	margin-left: 1rem;
+}
+.nav-masthead .active {
+	color: #000;
+	border-bottom-color: #fff;
+}
+
+.bd-footer {
+    padding: 4rem 0;
+    margin-top: 4rem;
+    font-size: 85%;
+    text-align: center;
+    background-color: #f7f7f7
+}
+
+.bd-footer a.toc {
+    font-weight: 500;
+    color: #464a4c;
+}
+
+.bd-footer a:hover {
+    color: lightblue;
+}
+
+.bd-footer p {
+    margin-bottom: 0
+}
+
+.bd-footer-links {
+    padding-left: 0;
+    margin-bottom: 1rem
+}
+
+.bd-footer-links li {
+    display: inline-block
+}
+
+.bd-footer-links li+li {
+    margin-left: 1rem
+}
+
+header {
+	padding: 126px 0 80px;
+}
+header a {
+	color: white;
+	font-weight: 600;
+	text-decoration: underline rgba(255,255,255,.6);
+}
+header .alert a {
+	color: #6610f2;
+	font-weight: 600;
+	text-decoration: none;
+}
+header {
+	margin-bottom: 80px;
+}</pre>
+  </body>
+</html>

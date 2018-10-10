@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Mindstorms EV3 File Syntax</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
+    <link rel="stylesheet" href="js/ekko-lightbox.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="bg-primary text-white">
+      <div class="container text-center"> <img src="img/favicon/favicon-100x100.png"
+
+          style="top: -20px; position: relative;">
+        <h1>Mindstorms EV3 File Syntax</h1>
+        <p class="lead">My Hobby Project to visualize EV3 programs created for LEGO Mindstorms EV3.</p>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+      Along with the creation of the EV3Tree Visualizer project I needed to understand the format of the EV3 file and the EV3P program XML structure.
+        I have created a rough description below.<br>
+        Work in progress, to be formatted and styled properly... 
+      </div>
+      <div class="row">
+        <pre><code style="font-size: 0.8em">
+EV3 file - EV3 main file
+==========================
+{zip file}
+	Project.lvprojx - main project file
+	*.ev3p - individual programs
+	*.mbxml - myblock definition files
+	*.rgf - graphic resource file
+	*.rsf - sound resource file
+	___CopyrightYear - plain text file - year of file creation
+	___ProjectDescription - plain text file - project description
+	___ProjectTitle - plain text file - project title
+
+
+EV3P xml file format
+==========================
+SourceFile
+	Namespace
+		VirtualInstrument
+			BlockDiagram
+				Sequence: ( Block | Wire )*
+
+Block = StartBlock | ConfigurableWaitFor | ConfigurableWhileLoop | ConfigurableMethodCall | ConfigurableCaseStructure | 
+		PairedConfigurableMethodCall | ConfigurableMegaAccessor
+	@Id = {blockid}
+	@Target = (blockTarget}.vix | {blockTarget}.ev3p // ev3p means a myblock
+	@Bounds = {bounds} 
+	Sequence: ConfigurableMethodTerminal*
+	Sequence: Terminal /sequence/ [0..2]
+	// StartBlock sequenceOut starts the execution chain - multiple StartBlocks are valid as well
+	// Block execution chain can be tracked via Terminal[@Id=SequenceOut]/@Wire --[0..n]--} Terminal[@Id=SequenceIn]/@Wire
+	// more incoming blocks mean parallel tracks
+
+ConfigurableWhileLoop ~~ Block
+	@DiagramId = {while_diagramid} D[1.9][0..9]*
+	@InterruptName = string - e.g. "01"
+	ConfigurableWhileLoop.BuiltInMethod
+		@CallType = LoopIndex | StopCondition
+			ConfigurableMethodCall
+			// if loop index is not not wired, skip it as it is not relevant
+			// next block sequence id starts from here - ConfigurableMethodCall/Terminal[@Id=SequenceOut]/@Wire
+	Sequence: Block | Wire
+	
+PairedConfigurableMethodCall ~~ Block
+	@PairedStructure = {blockid}
+	// SequenceIn arrives here
+
+ConfigurableCaseStructure | ConfigurableFlatCaseStructure ~~ Block
+	@Selected = {case_diagramid} - e.g. "D58"
+	@Default = {case_diagramid} - e.g. "D56"
+	@PairedConfigurableMethodCall = {blockid} - e.g. "n33"
+	Sequence: +
+		ConfigurableCaseStructure.Case | ConfigurableFlatCaseStructure.Case
+			@Id = {case_diagramid}
+			@Pattern = string
+			Sequence: Block | Wire
+		ConfigurableCaseStructure.ConfigurableCaseTunnel
+			@Id = {tunnelid} - e.g. "b18"
+			@Terminals = xs:string - value expression - e.g. "n17=w20, D18, D19=w11"
+				{blockid}={datawireid}[, {case_diagramid} | {case_diagramid}={datawireid}]+
+
+ConfigurableMegaAccessor ~~ Block
+	@Target = "X3.Lib:ConfigurableMegaAccessor"
+	@AccessorType = Input
+	Sequence: ConfigurableMethodTerminal+
+		Terminal
+			@Id = string // outgoing parameter name
+			@Direction = Output
+			@Wire = {datawireid}
+	
+ConfigurableMegaAccessor ~~ Block
+	@Target = "X3.Lib:ConfigurableMegaAccessor"
+	@AccessorType = Output
+	Sequence: ConfigurableMethodTerminal+
+		Terminal
+			@Id = string // outgoing parameter name
+			@Direction = Input
+			@Wire = {datawireid}
+
+Block /DataLogMaster/ ~~ Block
+	@Target = "X3Placeholder_2A058539-ED76-4476-93FE-CCE8AA559C5A_DataLogMasterSingle.vix"
+	Sequence: Block
+			
+Comment = 
+	@Bounds = {bounds} 
+	Content
+		{comment text}
+	
+{bounds} = value expression
+	{float} {float} {float} {float}
+  // X, Y, Width, Height
+  // e.g. "708 36 289 49"
+  
+ConfigurableMethodTerminal
+	@ConfiguredValue = {Value}
+	Sequence: ( Terminal /terminal_parameter/ | Terminal /terminal_ignore1/ )+
+			
+Terminal /terminal_parameter/ =
+	@Id = {ParameterName}
+	@Direction = Input | Output 
+	@DataType = Single | Single[] | Boolean | Boolean[] | String
+	@Wire = {datawireid}
+	
+Terminal /terminal_ignore1/ =
+	@Id = "InterruptsToListenFor_16B03592_CD76_4D58_8DC3_E3C3091E327A"
+	@Direction = Input
+	@DataType = Int32
+	// ignore this Terminal element
+
+Terminal /sequence/ = 
+	@Id = SequenceOut | SequenceIn
+	@Direction = Input | Output 
+	@DataType	 = "NationalInstruments:SourceModel:DataTypes:X3SequenceWireDataType"
+
+Wire = Wire /datawire/ | Wire /sequencewire/
+	
+Wire /datawire/ = 
+	@Id = xs:string - "w[1..9][0..9]*"
+	@Joints = N({tunnelid}:{case_diagramid} | {blockid}:[{paramname}|{myblockparam}]) 
+		[ [h({integer}) v({integer})]* [B(0)]* N({tunnelid}:{case_diagramid} | {blockid}:[{paramname}|{myblockparam}]) ]+
+	// e.g. N(b18:D19) N(n18:Rotations)
+	// e.g. N(b17:n14) v(37) h(413) N(b28:n28) B(0) v(16) h(137) N(n24:x)
+	// e.g. N(n9:upper\ bound) v(131) h(986) N(b29:n28) B(0) v(131) h(710) N(n24:y)
+	// e.g. N(n6:Result) v(22) h(101) N(n17:Boolean)
+	// e.g. N(n9:lower\ bound) v(58) h(266) N(n6:y) B(0) v(97) h(511) N(b14:n14)
+	// e.g. N(n9:input) v(25) h(266) N(n6:x) B(0) v(114) h(573) N(b18:n14) 
+
+Wire /sequencewire/ = 
+	@Id = xs:string - "w[1..9][0..9]*"
+	@Joints = xs:string - value expression
+		N({blockid}:SequenceOut) [h({integer}) v({integer})]* N({blockid}:SequenceIn)
+		// e.g. N(n24:SequenceOut) N(n10:SequenceIn)
+		// e.g. N(n10:SequenceOut) h(10) v(113) h(-553) v(127) N(n17:SequenceIn)
+		// e.g. N(Output:SequenceTerminal) N(n12:SequenceIn)
+		// e.g. N(n12:SequenceOut) N(Input:SequenceTerminal)
+
+@Bounds = xs:string - value expression
+	{float} {float} {float} {float}
+	// e.g. "708 36 289 49"
+
+
+MBXML xml file format
+==========================
+EditorDefinitions
+	PolyGroups
+		PolyGroup
+			@IconBaseName = {base_png}
+			Block
+				Mode = MyBlock
+				Description
+				ParamInfo
+					@Name
+					@Direction = Input | Output
+					@Identification = {param_png}
+					@DataType
+					@DefaultValue
+
+	
+Project.lvprojx xml file
+==========================
+SourceFile
+	Namespace
+		Project
+			Target
+				SourceFileReference /ev3p/
+					@Name = *.ev3p
+				DefinitionReference /media/
+					@DocumentTypeIdentifier = 'NationalInstruments.ExternalFileSupport.Modeling.ExternalFileType'
+					@Name = *.rgf | *.rsf
+			ProjectSettings
+				NamedGlobalData
+					Datum
+						@Name 
+						@Type = X3Boolean | X3BooleanArray | X3NumericArray | X3Numeric | X3String
+				DaisyChainMode
+					@On = {boolean}
+
+
+EV3M - EV3 ipad file
+==========================
+{zip file}
+	Program.ev3p - main project file
+
+SourceFile
+	VirtualInstrument
+  	BlockDiagram
+
+Block
+	// there are no Terminal /sequence/ nodes, Wire /sequencewire/ wires are to be used
+  
+ConfigurableTerminal
+	// used instead of ConfigurableMethodTerminal
+	// all parameters are on this level including Id, DataType, Direction
+
+ConfigurableWhileLoop
+	BuiltInConfigurableMethodCallStopCondition instead of ConfigurableWhileLoop.BuiltInMethod/ConfigurableMethodCall/CallType/LoopCondition
+	BuiltInConfigurableMethodCallLoopIndex instead of ConfigurableWhileLoop.BuiltInMethod/ConfigurableMethodCall/CallType/LoopIndex
+		// LoopIndex contains Id for children SequenceId node
+
+X3Comment instead of Comment
+	@p.Text = comment text (instead of Content)
+	@p.CommentColor = Orange | Purple | Green
+
+        </code></pre>
+      </div>
+    </div>
+    <footer class="bd-footer text-muted">
+      <div class="container text-center bg-light">
+        <div>
+          <ul class="bd-footer-links">
+            <li><a href="index.html" class="toc">EV3 Tree Visualizer</a></li>
+            <li><a href="features.html" class="toc">Coding Patterns and Best Practices</a></li>
+            <li><a href="filesyntax.html" class="toc">EV3 File Syntax</a></li>
+          </ul>
+        </div>
+        <div> <a class="btn btn-primary btn-lg" href="https://s3.eu-west-3.amazonaws.com/ev3treevis/ev3treevis-win-x86.zip">Download for Windows</a><br>
+          <br>
+          <p>Download the binary artifact for Windows systems. Artifact was build using GitLab/CI, binary hosting is on Amazon S3.</p>
+          <p>All codes are still under development. All suggestions, ideas, contributions are more than welcome! </p>
+          <p>Site and concept created by Attila Farago. You might freely use, share any generated artifacts, visualizations with attribution in place.</p>
+        </div>
+        <div>
+          <p><br>
+            <a class="btn btn-social-icon btn-google" href="mailto:attila.farago.hu+ev3treevis@gmail.com"> <span
+
+                class="fa fa-envelope-o"></span> </a> <a class="btn btn-social-icon btn-facebook"
+
+              href="https://www.facebook.com/ev3treevis"> <span class="fa fa-facebook"></span> </a> <a
+
+              class="btn btn-social-icon btn-linkedin" href="https://www.linkedin.com/in/afarago/"> <span
+
+                class="fa fa-linkedin"></span> </a> </p>
+        </div>
+      </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="js/ekko-lightbox.min.js"></script>
+    <script>
+			$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+				event.preventDefault();
+				$(this).ekkoLightbox();
+			});
+		</script>
+    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-111545401-1"></script>
+    <script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-111545401-1');
+		</script>
+    
+  </body>
+</html>
