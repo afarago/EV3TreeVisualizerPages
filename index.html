@@ -17,22 +17,26 @@
   </head>
   <body>
     <header class="bg-primary text-white">
-      <div class="container text-center"> <img src="img/favicon/favicon-100x100.png"
-          style="top: -20px; position: relative;">
-        <h1>Mindstorms EV3 Tree Visualizer</h1>
-        <p class="lead">My Hobby Project to visualize EV3 programs created for LEGO Mindstorms EV3.</p>
+      <div class="container text-center"> <img src="img/main.png" style="top: -20px; position: relative;">
+        <h1>EV3 Tree Visualizer and EV3 Brick Magic</h1>
+        <p class="lead">My Hobby Projects to visualize EV3 programs created for LEGO Mindstorms EV3 and control the EV3 brick.</p>
         <div class="alert alert-primary" role="alert">Try online version at <a
             href="http://ev3treevis.azurewebsites.net" target="_blank">http://ev3treevis.azurewebsites.net</a><br>
-          Download for Windows <a href="https://s3.eu-west-3.amazonaws.com/ev3treevis/ev3treevis-win-x86.zip">ev3treevis-win-x86.zip</a></div>
-        <div> News and updates are available on the <a href="https://www.facebook.com/ev3treevis/">facebook page</a>,
-        open-source on <a href="https://gitlab.com/attila.farago.hu/EV3TreeVisualizer">GitLab</a>.</div>
+          Download for Windows <a href="https://s3.eu-west-3.amazonaws.com/ev3treevis/ev3treevis-win-x86.zip">ev3treevis-win-x86.zip</a> and <a
+            href="https://s3.eu-west-3.amazonaws.com/ev3brickmagic/ev3brickmagic-win-x86.zip">ev3brickmagic-win-x86.zip</a> </div>
+        <br>
+        <div> News and updates are available on the <a href="https://www.facebook.com/ev3treevis/">facebook page</a>, open-source on <a
+            href="https://gitlab.com/attila.farago.hu/EV3TreeVisualizer">GitLab</a>.</div>
       </div>
     </header>
     <div class="container">
       <div>
-        <p> EV3 Tree visualizer has emerged as a hobby project to rapidly, effectively and easily visualize EV3 programs created by the LEGO Mindstorms EV3 programming environment EV3-G or EV3M programs created on the iPad graphical programming environment.<br>
-          This project is still a young one, so please kindly forgive any mistakes and give feedback to me. </p>
+        <p><b><a href="#EV3TreeVis">EV3 Tree Visualizer</a></b> has emerged as a hobby project to rapidly, effectively and easily visualize EV3 programs created by the LEGO Mindstorms EV3 programming environment EV3-G or EV3M programs created on the iPad graphical programming environment.</p>
+        <p><b><a href="#EV3BrickMagic">EV3 Brick Magic</a></b> tool was created for connecting the EV3 Brick with the magical unicorns over USB or Bluetooth connection over the standard LEGO firmware. Current capabilities enable users to have an effective and fast communication with the brick.</p>
       </div>
+    </div>
+    <div class="container">
+      <h1> <a id="EV3TreeVis"></a> EV3 Tree Visualizer </h1>
       <div class="row">
         <div class="col-sm-4">
           <h3>Command Line</h3>
@@ -89,10 +93,89 @@
           <p>EV3TreeVis shows missing variables, deleted myblocks, images and sounds and unused variables, images, sounds.</p>
         </div>
       </div>
-      <div>
-        <p> Best practices, tips and tricks for EV3 programming techniques along with their their visualization in the EV3TreeVis project for educational purposes are provided at the <a
-            href="features.html" class="toc">Coding Patterns and Best Practices</a> page. </p>
+      <div class="alert alert-info"> Best practices, tips and tricks for EV3 programming techniques along with their their visualization in the EV3TreeVis project for educational purposes are provided at the <a
+          href="features.html" class="toc">Coding Patterns and Best Practices</a> page. </div>
+    </div>
+    <!--- ============================================================================================== --->
+    <div class="container">
+      <h1> <a id="EV3BrickMagic"></a> EV3 Brick Magic </h1>
+      <div class="row">
+        <div class="col-sm-4">
+          <h3>File Copy</h3>
+          <img src="img/bm_files_cr.png" alt="File Copy" style="width:100%"
+            data-toggle="lightbox" data-gallery="features-gallery" data-remote="img/bm_files.png">
+          <p>EV3BrickMagic enables fast and easy file copy to and from the brick including extensive directory listing with wildcards. <br>
+            From brick to local wildcarding and directory copy is enabled. <br><br>
+            Brick content can be shown or decoded directly to the console without actual file copy as well including rbf program files and rgf graphics files. </p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Motor and Port Control</h3>
+          <img src="img/bm_motorportcontrol_cr.png" alt="Motor and Port Control"
+            style="width:100%" data-toggle="lightbox" data-gallery="features-gallery"
+            data-remote="img/bm_motorportcontrol.png">
+          <p>Brick motor and sensor control is available remotely from the PC. This provides an easier and more refined way to test or remote control your brick. <br>
+            Motor control provides different slow-medium-fast motor powers also showing the actual current speed achieved with the motor - useful as a motor tester. <br>
+            Port monitor supports all sensor modes, including the ones not shown with the official LEGO programs.</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Decode RBF Program File</h3>
+          <img src="img/bm_decode_cr.png" alt="Decode RBF Program File"
+            style="width:100%" data-toggle="lightbox" data-gallery="features-gallery"
+            data-remote="img/bm_decode.png">
+          <p>EV3 programs created with the Mindstorms program are compiled once they are copied to the brick. In the past several teams and individuals suffered from losing their because the original .ev3 file was lost due to PC issues.<br>
+            <br>
+            While I encourage all teams to do proper backup and versioning - this tool is able to decode and show almost all EV3G blocks and structures compiled by the LEGO Mindstorms. This enables easier understanding of the real code and emergency backup.</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Start and Stop Programs</h3>
+          <img src="img/bm_start_cr.png" alt="Start and Stop Programs" style="width:100%"
+            data-toggle="lightbox" data-gallery="features-gallery" data-remote="img/bm_start.png">
+          <p>Compiled programs on the brick can be started and stopped from the tool remotely.</p>
+          <p>Any running programs can be stopped remotely as well.</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Interactive Window</h3>
+          <img src="img/bm_window_cr.png" alt="Interactive Window" style="width:100%"
+            data-toggle="lightbox" data-gallery="features-gallery" data-remote="img/bm_window.png">
+          <p>Several functions can be accessed via the interactive window interface. </p>
+          <ul>
+            <li>This interface supports file browser with preview and copy functionality</li>
+            <li>Motor and Port Control with visual feedback and display</li>
+            <li>Mailbox messaging</li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <h3>Command Line</h3>
+          <img src="img/bm_cmdline_cr.png" alt="Command Line" style="width:100%"
+            data-toggle="lightbox" data-gallery="features-gallery" data-remote="img/bm_cmdline.png">
+          <p>All functions with several options are available from command line to enable easy access or scripting.</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Convert Graphics</h3>
+          <img src="img/bm_image_cr.png" alt="Convert Graphics" style="width:100%"
+            data-toggle="lightbox" data-gallery="features-gallery" data-remote="img/bm_image.png">
+          <p>EV3BrickMagic can convert bitmaps to and from LEGO RGF graphics file format. This can be somewhat faster and more convenient compared to the MINDSTORMS graphics tool.</p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Multiple Connections</h3>
+          <img src="img/bm_connection_cr.png" alt="Command Line" style="width:100%"
+            data-toggle="lightbox" data-gallery="features-gallery" data-remote="img/bm_connection.png">
+          <p>Brick connection can be established via USB cable or via Bluetooth.<br>
+            You can start the program is more than one instances establishing multiple connections - USB with brick serial id or BT connection with brick name or serial port id. </p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Sound and Piano</h3>
+          <img src="img/bm_sound_cr.png" alt="Command Line" style="width:100%"
+            data-toggle="lightbox" data-gallery="features-gallery" data-remote="img/bm_sound.png">
+          <p>Playing music is fun. You can play music sequences with a simple command line parameter. Optionally you can specify octave, length and volume for each note and default volume and tempo globally. <br>
+            Example: <code>EV3BrickMagic.exe beep CECEG-G- CECEG-G- C6HAGF-A- GFEDC-C-</code></p>
+        </div>
       </div>
+      <div>
+        <p> Serial port for an EV3 brick can be created after pairing with PC in Win-10. Open Control Panel &gt; Hardware and Sound &gt; Devices and Printers and select item with the brick name. Right click on item, select Properties &gt; Services tab and check Bluetooth Services | Serial port (SPP). </p>
+      </div>
+      <div class="alert alert-info"> The author of this tool and all the magical unicorns owe credits and thanks to the creators of monobrick.dk <b>Anders Søborg &amp; Lars Jeppesen</b> and <b>David Lechner</b>, creator of lms-hacker-tools. <br>
+        I am grateful for the early beta testing effort and feedbacks to <b>David Lechner</b> and for the openness and ideas to <b>Timm Merlan, Sanjay Seshan, Thomas Madeya and Kristof Nagy, Marc-Andre Bazergui and Illés Kökényesi</b>. </div>
     </div>
     <footer class="bd-footer text-muted">
       <div class="container text-center bg-light">
@@ -103,7 +186,8 @@
             <li><a href="filesyntax.html" class="toc">EV3 File Syntax</a></li>
           </ul>
         </div>
-        <div> <a class="btn btn-primary btn-lg" href="https://s3.eu-west-3.amazonaws.com/ev3treevis/ev3treevis-win-x86.zip">Download for Windows</a> &nbsp; <a
+        <div> <a class="btn btn-primary btn-lg" href="https://s3.eu-west-3.amazonaws.com/ev3treevis/ev3treevis-win-x86.zip">Download TreeVisualizer</a> &nbsp; <a
+            class="btn btn-primary btn-lg" href="https://s3.eu-west-3.amazonaws.com/ev3brickmagic/ev3brickmagic-win-x86.zip">Download BrickMagic</a> &nbsp; <a
             class="btn btn-primary btn-lg" href="http://ev3treevis.azurewebsites.net">Online version on Azure</a> <br>
           <br>
           <p>Download the binary artifact for Windows systems. Artifact was build using GitLab/CI, binary hosting is on Amazon S3.</p>
